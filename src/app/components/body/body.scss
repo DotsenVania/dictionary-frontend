@@ -1,0 +1,168 @@
+.body {
+    display: flex;
+    height: calc(100vh - 70px);
+    button {
+        font-weight: 600;
+        height: 100%;
+        background-color: #405a75;
+        color: white; 
+        border: none; 
+        padding: 15px; 
+        margin-left: 20px;
+        border-radius: 10px;
+        cursor: pointer; 
+        transition: all ease .3s; 
+        &:hover {
+            background-color: #305f92;
+        } 
+        &:focus {
+            outline: none;
+        }
+    }
+
+    hr {
+        height: 2px;
+        background-color: rgb(167, 167, 167);
+    }
+    &__left {
+        width: 50vw; 
+        padding-left: 10px;
+        overflow: auto;
+        padding-bottom: 10px;
+        &::-webkit-scrollbar {
+            width: 12px;               /* ширина всей полосы прокрутки */
+          }
+          
+          &::-webkit-scrollbar-track {
+            background: rgb(187, 187, 187);        /* цвет зоны отслеживания */
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background-color: #405a75;    /* цвет бегунка */
+            border-radius: 4px;       /* округлось бегунка */ 
+          }
+        h2 {
+            padding-left: 20px;
+            margin-right: 10px;
+        }
+        .form {
+            color: rgb(107, 107, 107);
+            font-weight: 500;
+            &__id {
+                background-color: #405a75;
+                color: white; 
+                padding: 4px 4px 5px 4px; 
+                border-radius: 5px; 
+            }
+
+            &__title {
+                display: flex;
+                align-items: center; 
+                flex-wrap: wrap;
+            }
+            &__wrapper {
+                display: flex; 
+                flex-wrap: wrap; 
+                align-items: center; 
+            }
+            &__input {
+                position: relative;
+                border: 2px solid rgb(167, 167, 167); 
+                margin: 20px 10px 20px 10px;
+                border-radius: 10px; 
+                padding:5px; 
+                &_title {
+                    position: absolute; 
+                    top: -14px;
+                    left: 10px;
+                    background-color: #e3dad0;
+                    padding: 0 5px 0 5px;
+                }
+            }
+            input {
+                padding: 5px; 
+                width: 200px;
+                height: 50%;
+                margin-top: 5px;
+                background-color: #e3dad0;
+                border: none;
+                font-size: 20px; 
+                
+                &:focus {
+                    outline: none;
+                }
+            }
+            textarea {
+                padding: 5px; 
+                width: 98%;
+                height: 70px;
+                margin-top: 5px;
+                background-color: #e3dad0;
+                border: none; 
+                &:focus {
+                    outline: none;
+                }
+            }
+            select {
+                padding: 5px; 
+                width: 100%;
+                margin-top: 5px;
+                background-color: #e3dad0;
+                border: none;
+                font-size: 18px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        
+    }
+    &__right {
+        width: 50vw;    
+       
+        .word {
+            position: relative; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr 50px 50px;
+            grid-auto-rows: 50px;
+            justify-items: center; 
+            align-items: center;
+            cursor: pointer; 
+            border-top: 1px solid rgb(187, 187, 187); 
+            &:hover{
+                background-color: #af9b85;
+                .word__img {
+                    display: block; 
+                }
+            }
+            .padding{
+
+            }
+            &__name {
+    
+            }
+            &__name_ukr {
+    
+            }
+            &__tr {
+    
+            }
+            &__delete {
+                font-size: 25px;
+            }
+            &__img {
+                position: absolute; 
+                display: none; 
+                top: 100%; 
+                right: 50%;
+                transform: translateX(50%);
+                z-index: 20;
+                img {
+                    width: 200px;
+                    height: 200%;
+                }
+            }
+        }      
+    }
+    
+}
