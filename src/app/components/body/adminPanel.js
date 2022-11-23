@@ -1,9 +1,9 @@
 import "./body.scss"; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {useState, useEffect} from 'react'; 
-
-
-function Body () {
+import {addWord, deleteWord} from '../../reducerSlice/mainSlice'; 
+import Word from "./word";
+function AdminPanel () {
     const {allDataWords, loadingAll} = useSelector(state => state.main); 
     const [postData, setPostData] = useState({
         category: null, 
@@ -20,12 +20,20 @@ function Body () {
         url_img: null
     }); // Об'єкт форми для добавлення і редагування слова 
     const [editingStatus, setEditingStatus] = useState(false); 
+    const [idUpdate, setIdUpdate] = useState(0); 
+    
 
     useEffect(() => {
         console.log(allDataWords)
-        Words ()
     }, [loadingAll]);
 
+    const dispatch = useDispatch()
+    function addWordLocalData(data) {
+        dispatch(addWord(data))
+    }
+    function deleteWordLocalData (id)  {
+        dispatch(deleteWord(id))
+    }
 
     //Post запроси **********************************************************
 
@@ -39,7 +47,7 @@ function Body () {
          })
 
         const result = res.text();
-        result.then(res => console.log(res))
+        result.then(res => addWordLocalData(data))
         return result;
      }
 
@@ -53,7 +61,7 @@ function Body () {
          })
 
         const result = res.text();
-        result.then(res => console.log(res))
+        result.then(res => deleteWordLocalData(data))
         return result;
      }
 
@@ -109,6 +117,7 @@ function Body () {
                 });
                 setEditingStatus(true)
             }
+            setIdUpdate(id)
         })
     }
     function cancelEditWord () {
@@ -119,34 +128,13 @@ function Body () {
                     example_ukr3: '', name_eng: '', transcription: '',
                     translate: '', url_audio: '', url_img: ''
                 })
-        
+        setIdUpdate(0)
     }
 
     //****************************************************************************
-
-    function Words () {
-        const words = allDataWords.map((item, i) => {
-            const { category, example_eng1, example_eng2, example_eng3,
-                    example_ukr1, example_ukr2, example_ukr3, id, name_eng, transcription,
-                    translate, url_audio, url_img} = item;
-
-
-            return (
-                <div key={i} className="word">
-                    <div className="word__name padding">{name_eng}</div>
-                    <div className="word__tr padding">{transcription}</div>
-                    <div className="word__name_ukr padding"> {translate}</div>
-                    <div className="word__delete" onClick={() => postRequestDeleteWord({id})}>&#10006;</div>
-                    <div className="word__edit" onClick={() => editWord(id)}>&#9998;</div>
-                    <div className="word__img">
-                        <img src={url_img} alt="" />
-                    </div>
-                </div>
-            )
-        })
-        return words; 
-    }
-
+    const wordsRender = allDataWords.map( (item, i) => {
+        return  <Word idUpdate={idUpdate} postRequestDeleteWord={postRequestDeleteWord} item={item} editWord={editWord}/>
+    }) 
     const formTitleAdd = (
         <h2>Додати слово</h2>
     )
@@ -237,21 +225,18 @@ function Body () {
                     <input value={postData.url_audio} name="url_audio" type="text"  onChange={(e) => onChangeValue(e)}/>
                 </div>
                 <div className="form__button">
-                    <button onClick={() => postRequestAddWord(postData)}>
-                        Відправити
-                    </button>
-                    <button onClick={() => postRequestUpdateWord(postData)}>
-                        Редагувати
-                    </button>
+                   { editingStatus ? null : <button onClick={() => postRequestAddWord(postData)}>Відправити</button>}
+                   { editingStatus ? <button onClick={() => postRequestUpdateWord(postData)}>Редагувати</button> : null}
                 </div>
             </div>
         </div>
         <div className="body__right">
-            {Words ()}
+            {wordsRender}
+           
         </div>
         </div>
     )
 }
 
 
-export default Body; 
+export default AdminPanel; 

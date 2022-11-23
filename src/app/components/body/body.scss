@@ -119,50 +119,6 @@
     }
     &__right {
         width: 50vw;    
-       
-        .word {
-            position: relative; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr 1fr 50px 50px;
-            grid-auto-rows: 50px;
-            justify-items: center; 
-            align-items: center;
-            cursor: pointer; 
-            border-top: 1px solid rgb(187, 187, 187); 
-            &:hover{
-                background-color: #af9b85;
-                .word__img {
-                    display: block; 
-                }
-            }
-            .padding{
-
-            }
-            &__name {
-    
-            }
-            &__name_ukr {
-    
-            }
-            &__tr {
-    
-            }
-            &__delete {
-                font-size: 25px;
-            }
-            &__img {
-                position: absolute; 
-                display: none; 
-                top: 100%; 
-                right: 50%;
-                transform: translateX(50%);
-                z-index: 20;
-                img {
-                    width: 200px;
-                    height: 200%;
-                }
-            }
-        }      
     }
     
 }
