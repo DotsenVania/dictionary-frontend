@@ -43,13 +43,27 @@ function Body () {
         return result;
      }
 
-     async function postRequestDeletdWord (data) { // Видалення слова
+     async function postRequestDeleteWord (data) { // Видалення слова
         let res =  await fetch('http://php.dotsenvania.com/', {
            method: 'POST',
            header: {
              'Content-type': 'application/x-www-from-urlencoded'
            },
            body: JSON.stringify({...data, action: 'delete'})
+         })
+
+        const result = res.text();
+        result.then(res => console.log(res))
+        return result;
+     }
+
+     async function postRequestUpdateWord (data) { // Видалення слова
+        let res =  await fetch('http://php.dotsenvania.com/', {
+           method: 'POST',
+           header: {
+             'Content-type': 'application/x-www-from-urlencoded'
+           },
+           body: JSON.stringify({...data, action: 'update'})
          })
 
         const result = res.text();
@@ -122,7 +136,7 @@ function Body () {
                     <div className="word__name padding">{name_eng}</div>
                     <div className="word__tr padding">{transcription}</div>
                     <div className="word__name_ukr padding"> {translate}</div>
-                    <div className="word__delete" onClick={() => postRequestDeletdWord({id})}>&#10006;</div>
+                    <div className="word__delete" onClick={() => postRequestDeleteWord({id})}>&#10006;</div>
                     <div className="word__edit" onClick={() => editWord(id)}>&#9998;</div>
                     <div className="word__img">
                         <img src={url_img} alt="" />
@@ -225,6 +239,9 @@ function Body () {
                 <div className="form__button">
                     <button onClick={() => postRequestAddWord(postData)}>
                         Відправити
+                    </button>
+                    <button onClick={() => postRequestUpdateWord(postData)}>
+                        Редагувати
                     </button>
                 </div>
             </div>
