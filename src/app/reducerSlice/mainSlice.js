@@ -3,7 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   allDataWords: [],
   loadingAll: true,
-  admin: false,
+  activePage: {
+    admin: false,
+    user: false,
+    categories: true,
+    dictionary: false
+  },
   mainDictionary : []
 };
 
@@ -29,12 +34,46 @@ export const mainSlice = createSlice({
         }
       })
     },
-    adminStatus: (state, actions) => {
-      state.admin = !state.admin
+    activePageStatus: (state, actions) => {
+      switch (actions.payload) {
+        case 'adminAcitve':
+          state.activePage = {
+            admin: true,
+            user: true,
+            categories: false,
+            dictionary: false
+          }
+          break;
+          case 'categoriesActive':
+          state.activePage = {
+            admin: false,
+            user: false,
+            categories: true,
+            dictionary: false
+          }
+          break;
+          case 'dictionaryActive':
+          state.activePage = {
+            admin: false,
+            user: false,
+            categories: false,
+            dictionary: true
+          }
+          break;
+      
+        default:
+          state.activePage = {
+            admin: false,
+            user: false,
+            categories: true,
+            dictionary: false
+          }
+          break;
+      }
     }
   },
 });
 
-export const { setAllDataWords, setLoading, addWord, deleteWord, adminStatus } = mainSlice.actions;
+export const { setAllDataWords, setLoading, addWord, deleteWord, activePageStatus } = mainSlice.actions;
 
 export default mainSlice.reducer;

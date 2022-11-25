@@ -32,6 +32,13 @@
             color: white; 
             align-items: center; 
             justify-content: center;
+            cursor: pointer; 
+            transition: all ease 0.3s; 
+            border-radius: 10px; 
+            &:hover {
+              background-color: #5383b6;
+
+            }
             &_num {
     
             }

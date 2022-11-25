@@ -27,7 +27,8 @@ function AdminPanel () {
         console.log(allDataWords)
     }, [loadingAll]);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     function addWordLocalData(data) {
         dispatch(addWord(data))
     }
@@ -147,7 +148,7 @@ function AdminPanel () {
     )
 
     return (
-        <div className={`body ${admin ? 'active': ''}`}>
+        <div className={`body`}>
         <div className="body__left">
             <div className="body__form form">
                 <div className="form__title">

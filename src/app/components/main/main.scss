@@ -1,20 +1,31 @@
 .main__wrapper {
     display: grid; 
-    grid-template-columns: 100vw 100vw;
     overflow: hidden; 
+    &_sliding-block {
+        display: grid; 
+        grid-template-columns: 100vw 100vw 100vw;
+        width: 100vh;
+        transform: translateX(-100vw);
+        transition: all ease 0.3s;
+        &.active__dictionary {
+            transform: translateX(0vw);
+        }
+        &.active__admin  {
+            transform: translateX(-200vw);
+        }
+        &.active__user  {
+            transform: translateX(-200vw);
+        }
+    }
     .body {
         position: relative;
-        transition: all ease .5s; 
-        &.active {
-            transform: translateX(-100vw);
-        }
+       
     }
     .wrapper__categories {
         position: relative;
-        transition: all ease .5s; 
-        &.active {
-            transform: translateX(-100vw);
-        }
+        
+    }
+    .main_dictionary {
     }
    
 }
