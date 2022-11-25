@@ -1,12 +1,12 @@
-import "./body.scss"; 
+import "./adminPanel.scss"; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {useState, useEffect} from 'react'; 
 import {addWord, deleteWord} from '../../reducerSlice/mainSlice'; 
 import Word from "./word";
 function AdminPanel () {
-    const {allDataWords, loadingAll} = useSelector(state => state.main); 
+    const {allDataWords, loadingAll, admin} = useSelector(state => state.main); 
     const [postData, setPostData] = useState({
-        category: null, 
+        category: 'Людина', 
         example_eng1: null, 
         example_eng2: null, 
         example_eng3: null,
@@ -147,7 +147,7 @@ function AdminPanel () {
     )
 
     return (
-        <div className="body">
+        <div className={`body ${admin ? 'active': ''}`}>
         <div className="body__left">
             <div className="body__form form">
                 <div className="form__title">

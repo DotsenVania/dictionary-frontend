@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   allDataWords: [],
   loadingAll: true,
-  status: 'idle',
+  admin: false,
+  mainDictionary : []
 };
 
 
@@ -27,10 +28,13 @@ export const mainSlice = createSlice({
           return item; 
         }
       })
+    },
+    adminStatus: (state, actions) => {
+      state.admin = !state.admin
     }
   },
 });
 
-export const { setAllDataWords, setLoading, addWord, deleteWord } = mainSlice.actions;
+export const { setAllDataWords, setLoading, addWord, deleteWord, adminStatus } = mainSlice.actions;
 
 export default mainSlice.reducer;

@@ -1,0 +1,40 @@
+.title {
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+.wrapper__categories {
+    height: calc(100vh - 90px);
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 12px;               /* ширина всей полосы прокрутки */
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgb(187, 187, 187);        /* цвет зоны отслеживания */
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #405a75;    /* цвет бегунка */
+        border-radius: 4px;       /* округлось бегунка */ 
+      }
+    .categories {
+        display: grid;
+        // height: calc(100vh - 90px);
+        grid-template-columns: 200px 200px 200px 200px; 
+        grid-auto-rows: 100px;
+        justify-content: center;
+        gap: 10px;
+        &__item {
+            display: flex;
+            flex-direction: column;
+            background-color: #405a75;
+            color: white; 
+            align-items: center; 
+            justify-content: center;
+            &_num {
+    
+            }
+        }
+    }
+}

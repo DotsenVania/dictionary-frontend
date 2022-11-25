@@ -1,0 +1,20 @@
+.main__wrapper {
+    display: grid; 
+    grid-template-columns: 100vw 100vw;
+    overflow: hidden; 
+    .body {
+        position: relative;
+        transition: all ease .5s; 
+        &.active {
+            transform: translateX(-100vw);
+        }
+    }
+    .wrapper__categories {
+        position: relative;
+        transition: all ease .5s; 
+        &.active {
+            transform: translateX(-100vw);
+        }
+    }
+   
+}

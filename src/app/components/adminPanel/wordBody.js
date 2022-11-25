@@ -1,4 +1,4 @@
-import './body.scss'; 
+import './wordBody.scss'; 
 import {useSelector, useDispatch} from "react-redux"; 
 import {useState, useEffect} from 'react'; 
 import {addWord, deleteWord} from '../../reducerSlice/mainSlice'; 

@@ -1,0 +1,52 @@
+.word__wrapper {
+    position: relative;
+    
+    .descr {
+        display: flex; 
+        flex-direction: column;
+        max-height: 0px;
+        overflow: hidden;
+        transition: all ease 0.3s;
+        &.active {
+            max-height: 1000px;
+            // overflow: auto;
+        }
+
+        &__category {
+            background-color: #516e8d;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            color: white; 
+            padding: 5px; 
+            margin: 10px; 
+        }
+        
+        .sections {
+            display: flex; 
+            font-size: 16px;
+            padding: 10px; 
+            .left {
+                &__eng {
+                    color: rgb(39, 39, 39); 
+                    font-weight: 600;
+                   
+                    span {
+                        color: #257ad4; 
+                    }
+                }
+                &__ukr {
+                    color: rgb(109, 109, 109);
+                    font-weight: 400;
+                    margin-bottom: 15px;
+                }
+
+            }
+            .right {
+                img {
+                    width: 200px; 
+                }
+            }
+        }
+    }
+}

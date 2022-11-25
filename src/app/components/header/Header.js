@@ -1,6 +1,6 @@
 import './header.scss'; 
 import { useSelector, useDispatch } from 'react-redux';
-import { setLoading } from '../../../app/reducerSlice/mainSlice';
+import { setLoading, adminStatus } from '../../../app/reducerSlice/mainSlice';
 function Header () {
     const {loadingAll} = useSelector(state => state.main)
     const dispatch = useDispatch();
@@ -19,6 +19,7 @@ function Header () {
                 <span>3000 англійських слів</span> 
                 </div>
                 {loadingAll ? <h2 style={{fontSize: '30px'}}>loading</h2> : null}
+                <button className='user' onClick={() => dispatch(adminStatus())}>Admin</button>
             </header>
         </>
     )

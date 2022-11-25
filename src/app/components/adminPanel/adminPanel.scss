@@ -1,6 +1,7 @@
 .body {
     display: flex;
     height: calc(100vh - 70px);
+    overflow: auto;
     button {
         font-weight: 600;
         height: 100%;
@@ -28,7 +29,7 @@
         width: 50vw; 
         padding-left: 10px;
         overflow: auto;
-        padding-bottom: 10px;
+        padding: 10px;
         &::-webkit-scrollbar {
             width: 12px;               /* ширина всей полосы прокрутки */
           }
@@ -118,7 +119,21 @@
         
     }
     &__right {
-        width: 50vw;    
+        width: 50vw;
+        padding: 10px;  
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 12px;               /* ширина всей полосы прокрутки */
+          }
+          
+          &::-webkit-scrollbar-track {
+            background: rgb(187, 187, 187);        /* цвет зоны отслеживания */
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background-color: #405a75;    /* цвет бегунка */
+            border-radius: 4px;       /* округлось бегунка */ 
+          }  
     }
     
 }
