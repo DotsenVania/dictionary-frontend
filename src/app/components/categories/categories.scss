@@ -22,25 +22,34 @@
         display: grid;
         // height: calc(100vh - 90px);
         grid-template-columns: 200px 200px 200px 200px; 
-        grid-auto-rows: 100px;
+        grid-auto-rows: 150px;
         justify-content: center;
         gap: 10px;
         &__item {
             display: flex;
             flex-direction: column;
-            background-color: #405a75;
+            background-color: #2d455f;
             color: white; 
             align-items: center; 
             justify-content: center;
             cursor: pointer; 
             transition: all ease 0.3s; 
             border-radius: 10px; 
+            font-size: 20px;
+            font-weight: 600;
+            span {
+              font-size: 30px;
+              padding-bottom: 10px; 
+            }
+
             &:hover {
-              background-color: #5383b6;
+              background-color: #536f8d;
 
             }
             &_num {
-    
+              padding-top: 10px;
+              font-size: 15px;
+              font-weight: 400;
             }
         }
     }

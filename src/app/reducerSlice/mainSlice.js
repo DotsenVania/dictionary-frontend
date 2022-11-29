@@ -17,12 +17,14 @@ export const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
+    //loading data =====================================
     setAllDataWords: (state, actions) => {
       state.allDataWords = actions.payload; 
     },
     setLoading: (state, actions) => {
           state.loadingAll = actions.payload;
     },
+    // Admin action ====================================
     addWord: (state, actions) => {
       state.allDataWords.push(actions.payload);
     },
@@ -34,6 +36,7 @@ export const mainSlice = createSlice({
         }
       })
     },
+    //Page navigation ==================================
     activePageStatus: (state, actions) => {
       switch (actions.payload) {
         case 'adminAcitve':
@@ -70,10 +73,16 @@ export const mainSlice = createSlice({
           }
           break;
       }
+    },
+    //Dictionary =======================================
+    setAllWordsInDictionary: (state, actions) => {
+      state.mainDictionary = state.allDataWords; 
+    },
+    setCategoryWordsInDictionary: (state, actions) => {
+      state.mainDictionary = actions.payload;  
     }
   },
 });
-
-export const { setAllDataWords, setLoading, addWord, deleteWord, activePageStatus } = mainSlice.actions;
+export const { setAllDataWords, setLoading, addWord, deleteWord, activePageStatus, setAllWordsInDictionary, setCategoryWordsInDictionary } = mainSlice.actions;
 
 export default mainSlice.reducer;

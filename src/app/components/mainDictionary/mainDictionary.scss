@@ -1,0 +1,35 @@
+.pt {
+    padding-top: 10px;
+}
+.main_dictionary {
+    position: relative; 
+    height: calc(100vh - 70px - 80px - 51px);
+    box-sizing: border-box;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 12px;               /* ширина всей полосы прокрутки */
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgb(187, 187, 187);        /* цвет зоны отслеживания */
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: #405a75;    /* цвет бегунка */
+        border-radius: 4px;       /* округлось бегунка */ 
+      }
+
+    &__title {
+        font-weight: 600;
+        text-align: center;
+        font-size: 30px;
+        padding: 20px; 
+    }
+}
+.first {
+    background-color: #405a75;
+    color: white; 
+    &:hover {
+        background-color: #405a75;
+    }
+}

@@ -1,7 +1,8 @@
 .body {
     display: flex;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 90px);
     overflow: auto;
+    padding-top: 10px;
     button {
         font-weight: 600;
         height: 100%;

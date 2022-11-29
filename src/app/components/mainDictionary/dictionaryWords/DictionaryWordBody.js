@@ -1,23 +1,21 @@
-import './wordBody.scss'; 
-import {useSelector, useDispatch} from "react-redux"; 
-import {useState, useEffect} from 'react'; 
-import {addWord, deleteWord} from '../../reducerSlice/mainSlice'; 
+import './dictionaryWordBody.scss'; 
 import reactStringReplace  from  'react-string-replace';
-function WordBody(props) {
+function DictionaryWordBody(props) {
     const { category, example_eng1, example_eng2, example_eng3,
-        example_ukr1, example_ukr2, example_ukr3, id, name_eng, url_img} = props.item;
+        example_ukr1, example_ukr2, example_ukr3, id, name_eng, url_img} = props.word;
+
 
     function highlightMainWord (str) {
         const regex = new RegExp(name_eng,'gmi');
         return reactStringReplace(str, regex, (match, i) => (
-       <div style={{display: 'inline'}} key={id}>
+        <div style={{display: 'inline'}} key={id}>
             <span>{name_eng}</span>
             {match}
-       </div>
-       ))
+        </div>
+        ))
     }
-
-    return(
+    
+    return (
         <div key={id} className={`descr ${props.active ? 'active': ''}`}>
             <div className="descr__category">{category}</div>
             
@@ -39,4 +37,4 @@ function WordBody(props) {
     )
 }
 
-export default WordBody; 
+export default DictionaryWordBody; 

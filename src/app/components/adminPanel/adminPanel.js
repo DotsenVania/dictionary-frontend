@@ -7,17 +7,17 @@ function AdminPanel () {
     const {allDataWords, loadingAll, admin} = useSelector(state => state.main); 
     const [postData, setPostData] = useState({
         category: 'Людина', 
-        example_eng1: null, 
-        example_eng2: null, 
-        example_eng3: null,
-        example_ukr1: null, 
-        example_ukr2: null, 
-        example_ukr3: null, 
-        name_eng: null, 
-        transcription: null,
-        translate: null, 
-        url_audio: null, 
-        url_img: null
+        example_eng1: '', 
+        example_eng2: '', 
+        example_eng3: '',
+        example_ukr1: '', 
+        example_ukr2: '', 
+        example_ukr3: '', 
+        name_eng: '', 
+        transcription: '',
+        translate: '', 
+        url_audio: '', 
+        url_img: ''
     }); // Об'єкт форми для добавлення і редагування слова 
     const [editingStatus, setEditingStatus] = useState(false); 
     const [idUpdate, setIdUpdate] = useState(0); 
@@ -82,6 +82,14 @@ function AdminPanel () {
 
      //****************************************************************************
 
+ // TEST POST REQUEST =============================
+
+
+//=================================================
+
+
+
+
      // Опрацювання форми додавання і редагування *********************************
     function onChangeValue (e) {
         let name = e.target.getAttribute('name')
@@ -134,7 +142,7 @@ function AdminPanel () {
 
     //****************************************************************************
     const wordsRender = allDataWords.map( (item, i) => {
-        return  <Word idUpdate={idUpdate} postRequestDeleteWord={postRequestDeleteWord} item={item} editWord={editWord}/>
+        return  <Word key={i} idUpdate={idUpdate} postRequestDeleteWord={postRequestDeleteWord} item={item} editWord={editWord}/>
     }) 
     const formTitleAdd = (
         <h2>Додати слово</h2>
@@ -210,11 +218,23 @@ function AdminPanel () {
                     <div className="form__input_title">Категорія</div>
                     <select value={postData.category} name="category" onChange={(e) => onChangeValue(e)}>
                         <option value="Людина">Людина</option>
+                        <option value="Рух">Рух</option>
+                        <option value="Думки і почуття">Думки і почуття</option>
+                        <option value="Місця і числа">Місця і числа</option>
+                        <option value="Час">Час</option>
+                        <option value="Кількість">Кількість</option>
+                        <option value="Більше-менше">Більше-менше</option>
+                        <option value="Дім і речі">Дім і речі</option>
+                        <option value="Освіта">Освіта</option>
                         <option value="Робота">Робота</option>
-                        <option value="Їжа">Їжа</option>
-                        <option value="Відпочинок">Відпочинок</option>
-                        <option value="Речі">Речі</option>
-                        <option value="IT слово">IT слово</option>
+                        <option value="Природа">Природа</option>
+                        <option value="Колір, форма і розмір">Колір, форма і розмір</option>
+                        <option value="Суспільство"> Суспільство</option>
+                        <option value="Відпочинок і спорт">Відпочинок і спорт</option>
+                        <option value="Подорожі">Подорожі</option>
+                        <option value="Технології">Технології</option>
+                        <option value="Їжа і напої">Їжа і напої</option>
+                        <option value="IT слова">IT слова</option>
                     </select>
                 </div>
                 <div className="form__input">
@@ -228,6 +248,14 @@ function AdminPanel () {
                 <div className="form__button">
                    { editingStatus ? null : <button onClick={() => postRequestAddWord(postData)}>Відправити</button>}
                    { editingStatus ? <button onClick={() => postRequestUpdateWord(postData)}>Редагувати</button> : null}
+                </div>
+
+                <div className="file">
+                    <form action="http://php.dotsenvania.com/index.php" method="post" encType="multipart/form-data">
+                        <input name="file" type="file"/>
+                        <button type="submit">Click</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>

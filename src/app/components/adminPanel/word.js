@@ -20,8 +20,8 @@ function Word (props) {
             }
         
             return (
-                <div className="word__wrapper">
-                    <div key={id} className={`word ${classActiveUpdate}`}>
+                <div key={id} className="word__wrapper">
+                    <div className={`word ${classActiveUpdate}`}>
                         <div className={`word__more btn-control ${active ? 'active': ''}`} onClick={(e) => {desctiptionClassActive(e)}}><span>&#10140;</span></div>
                         <div className="word__name padding">{name_eng}</div>
                         <div className="word__tr padding">{transcription}</div>
@@ -29,7 +29,7 @@ function Word (props) {
                         <div className="word__delete btn-control" onClick={() => props.postRequestDeleteWord({id})}><span>&#10006;</span></div>
                         <div className="word__edit btn-control" onClick={(e) => props.editWord(id)}>&#9998;</div>
                     </div>
-                <WordBody item={props.item} active={ active }/>
+                <WordBody key={id} item={props.item} active={ active }/>
                 </div>
                 
             )
