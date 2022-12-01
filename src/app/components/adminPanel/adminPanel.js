@@ -1,10 +1,14 @@
 import "./adminPanel.scss"; 
 import {useSelector, useDispatch} from "react-redux"; 
-import {useState, useEffect} from 'react'; 
+import {useState, useEffect, useRef} from 'react'; 
 import {addWord, deleteWord} from '../../reducerSlice/mainSlice'; 
+import { useDataChange } from "../../hooks/useDataChange";
+import { setAllDataWords, setLoading } from "../../reducerSlice/mainSlice";
 import Word from "./word";
 function AdminPanel () {
-    const {allDataWords, loadingAll, admin} = useSelector(state => state.main); 
+    const { postRequestAllWords } = useDataChange(); 
+    const inputEl = useRef(null);
+    const {allDataWords, loadingAll} = useSelector(state => state.main); 
     const [postData, setPostData] = useState({
         category: 'Людина', 
         example_eng1: '', 
@@ -16,7 +20,6 @@ function AdminPanel () {
         name_eng: '', 
         transcription: '',
         translate: '', 
-        url_audio: '', 
         url_img: ''
     }); // Об'єкт форми для добавлення і редагування слова 
     const [editingStatus, setEditingStatus] = useState(false); 
@@ -48,7 +51,16 @@ function AdminPanel () {
          })
 
         const result = res.text();
-        result.then(res => addWordLocalData(data))
+        result.then(res => {
+            addWordLocalData({...data, id: +(allDataWords[allDataWords.length - 1].id) + 1 });
+            fileFormRequest(+(allDataWords[allDataWords.length - 1].id) + 1);
+            postRequestAllWords() 
+            .then(res => {
+                dispatch(setAllDataWords(res)); 
+                dispatch(setLoading(false));  
+                // dispatch(setAllDataWords(word)); 
+              });
+        })
         return result;
      }
 
@@ -62,7 +74,15 @@ function AdminPanel () {
          })
 
         const result = res.text();
-        result.then(res => deleteWordLocalData(data))
+        result.then(res => {
+            deleteWordLocalData(data);
+            postRequestAllWords() 
+            .then(res => {
+                dispatch(setAllDataWords(res)); 
+                dispatch(setLoading(false));  
+                // dispatch(setAllDataWords(word)); 
+              });
+        })
         return result;
      }
 
@@ -76,14 +96,42 @@ function AdminPanel () {
          })
 
         const result = res.text();
-        result.then(res => console.log(res))
+        result.then(res => {
+            fileFormRequest(data.id);
+            postRequestAllWords() 
+            .then(res => {
+                dispatch(setAllDataWords(res)); 
+                dispatch(setLoading(false));  
+                // dispatch(setAllDataWords(word)); 
+              });
+        })
         return result;
      }
 
      //****************************************************************************
 
  // TEST POST REQUEST =============================
+    async function reqAudioWord (data) { // Видалення слова
+        let res =  await fetch('http://php.dotsenvania.com/post.php', {
+        method: 'POST',
+        // headers: {
+        //     'Content-type': 'multipart/form-data'
+        // },
+        body: data
+        })
 
+        const result = res.text();
+        return result;
+    }
+
+    function fileFormRequest(id) {
+        // e.preventDefault()
+        const formData = new FormData(inputEl.current); 
+        formData.append("action", 'file');
+        formData.append("id", id);
+        reqAudioWord(formData)
+        .then(data => console.log(data)) 
+     }
 
 //=================================================
 
@@ -120,7 +168,6 @@ function AdminPanel () {
                     name_eng: addBackSlash(item.name_eng), 
                     transcription: addBackSlash(item.transcription),
                     translate: addBackSlash(item.translate), 
-                    url_audio: addBackSlash(item.url_audio), 
                     url_img: addBackSlash(item.url_img),
                     id
                 });
@@ -241,22 +288,19 @@ function AdminPanel () {
                     <div className="form__input_title">url картинки</div>
                     <input value={postData.url_img} name="url_img" type="text"  onChange={(e) => onChangeValue(e)}/>
                 </div>
-                <div className="form__input">
-                    <div className="form__input_title">url audio</div>
-                    <input value={postData.url_audio} name="url_audio" type="text"  onChange={(e) => onChangeValue(e)}/>
+                <div className="file">
+                    <form ref={inputEl}>
+                        <input name="fileName" type="file"/>
+                        <input name="action" type="text"/>
+                    </form>
+                    
                 </div>
                 <div className="form__button">
                    { editingStatus ? null : <button onClick={() => postRequestAddWord(postData)}>Відправити</button>}
                    { editingStatus ? <button onClick={() => postRequestUpdateWord(postData)}>Редагувати</button> : null}
                 </div>
 
-                <div className="file">
-                    <form action="http://php.dotsenvania.com/index.php" method="post" encType="multipart/form-data">
-                        <input name="file" type="file"/>
-                        <button type="submit">Click</button>
-                    </form>
-                    
-                </div>
+                
             </div>
         </div>
         <div className="body__right">

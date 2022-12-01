@@ -8,12 +8,13 @@ function Categories () {
 
     const [allCategories, setAllCategories] = useState([]);// Масив категрій
     const [arrCatgories, setArrCatgories] = useState([]);// Підсумковий масив з усіма категоріями і кількісттю слів цієї категорії...
-
     const dispatch = useDispatch();
     const { setAllWords, setCategoryOfWords } = useDataChange(); 
+  
     
     useEffect(() => {
-        allDataWords.map(item => {
+            setAllCategories([])
+            allDataWords.map(item => {
             setAllCategories(state => {
                 return [...state, item.category]
             })
@@ -21,6 +22,7 @@ function Categories () {
     }, [loadingAll])
 
     useEffect(() => {
+        setArrCatgories([])
        allCategories.filter(function(item, pos) {
             return allCategories.indexOf(item) == pos;
         }).map(item => calc(item))
@@ -119,7 +121,7 @@ function Categories () {
                     Всі слова
                     <div className='categories__item_num'>Кількісьть слів - {allDataWords.length}</div>
                 </div>
-                { categories}
+                {categories}
             </div>
         </div>
     )

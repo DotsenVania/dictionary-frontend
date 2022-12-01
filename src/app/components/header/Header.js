@@ -18,11 +18,16 @@ function Header () {
         classActivPage = 'activeDictionary'
     }
 
-   
+   const spiner = (
+    <svg class="spinner" viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+   )
     return (
         <>
             <header className={`header ${clazz}`}>
                 <div className={`back `} onClick={() => dispatch(activePageStatus('categoriesActive'))}><span style={styleIconBack} class="material-symbols-outlined">arrow_back_ios_new</span></div>
+                
                 <div className="header__wrapper">
                     <div onClick={() => dispatch(activePageStatus('categoriesActive'))} className="header__logo">
                         <span className="header__logo_gold">
@@ -30,15 +35,16 @@ function Header () {
                         </span>
                         &nbsp;
                         <span className="header__logo_words">words</span>
+                        {loadingAll ? <span className='header__loading'>{spiner}</span> : null}
                     </div>
                     <div className={`header__logo_title`}>
                         <div className={`wrapper ${classActivPage}`}>
-                            <span className='admin'>Admin</span> 
+                            <span className='admin'>Admin Panel</span> 
                             <span>3000 англійських слів</span> 
                             <span className='dictionary'>Dictionary</span> 
                         </div>
                     </div>
-                    {loadingAll ? <h2 style={{fontSize: '30px'}}>loading</h2> : null}
+                    
                 </div>
                 
                 <div className='user' onClick={() => dispatch(activePageStatus('adminAcitve'))}><span class="material-symbols-outlined">person</span></div>
